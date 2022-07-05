@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-
+import create from './services/phoneServices';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [filteredName, setFilteredName] = useState('');
@@ -28,13 +28,23 @@ const App = () => {
       return;
     }
 
-    setPersons([
-      ...persons,
-      {
-        name: newName,
-        number: newNumber,
-      },
-    ]);
+    const personObject = {
+      name: newName,
+      number: newNumber,
+      id: persons.length + 1,
+    };
+
+    create(personObject).then((response) => {
+      setPersons(persons.concat(response.data));
+    });
+
+    // setPersons([
+    //   ...persons,
+    //   {
+    //     name: newName,
+    //     number: newNumber,
+    //   },
+    // ]);
     setNewName('');
     setNewNumber('');
   };

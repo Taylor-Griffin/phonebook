@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Persons = ({ filteredName, persons }) => {
-  console.log(persons, filteredName);
   return (
     <div>
       {filteredName.length
