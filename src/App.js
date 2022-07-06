@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-import create from './services/phoneServices';
+import { create } from './services/phoneServices';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [filteredName, setFilteredName] = useState('');
@@ -38,15 +38,32 @@ const App = () => {
       setPersons(persons.concat(response.data));
     });
 
-    // setPersons([
-    //   ...persons,
-    //   {
-    //     name: newName,
-    //     number: newNumber,
-    //   },
-    // ]);
+    setPersons([
+      ...persons,
+      {
+        name: newName,
+        number: newNumber,
+      },
+    ]);
     setNewName('');
     setNewNumber('');
+  };
+
+  const deletePerson = (e) => {
+    let personId = e.target.previousElementSibling.getAttribute('data-id');
+    const personName =
+      e.target.previousElementSibling.getAttribute('data-name');
+    try {
+      axios.delete(`http://localhost:3001/persons/${personId}`);
+    } catch (err) {
+      console.log(err);
+    }
+    if (window.confirm(`Delete ${personName} ?`)) {
+      const filteredPersons = persons.filter((person) => {
+        return person.id !== +personId;
+      });
+      setPersons(filteredPersons);
+    }
   };
 
   return (
@@ -63,7 +80,11 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons filteredName={filteredName} persons={persons} />
+      <Persons
+        filteredName={filteredName}
+        deletePerson={deletePerson}
+        persons={persons}
+      />
     </div>
   );
 };

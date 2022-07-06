@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Persons = ({ filteredName, persons }) => {
+const Persons = ({ filteredName, persons, deletePerson }) => {
   return (
     <div>
       {filteredName.length
@@ -11,14 +11,22 @@ const Persons = ({ filteredName, persons }) => {
                 .includes(filteredName.toLocaleLowerCase())
             )
             .map((person) => (
-              <p key={person.name}>
-                {person.name} {person.number}
-              </p>
+              <div key={person.id}>
+                <p>
+                  {person.name} {person.number}
+                </p>
+                <button>delete</button>
+              </div>
             ))
         : persons.map((person) => (
-            <p key={person.name}>
-              {person.name} {person.number}
-            </p>
+            <div key={person.id} className="flex">
+              <p data-id={person.id} data-name={person.name}>
+                {person.name} {person.number}
+              </p>
+              <button className="button delete" onClick={deletePerson}>
+                delete
+              </button>
+            </div>
           ))}
     </div>
   );

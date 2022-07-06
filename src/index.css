@@ -11,3 +11,35 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  .flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
+  }
+
+  .flex-input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 230px;
+    padding: 5px;
+  }
+
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .delete{
+    margin-top: 0;
+    background-color: rebeccapurple;
+  }

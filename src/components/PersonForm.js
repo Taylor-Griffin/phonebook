@@ -2,10 +2,10 @@ import React from 'react';
 
 const PersonForm = ({ handleSubmit, handleChange, newName, newNumber }) => {
   return (
-    <div>
+    <>
       {' '}
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="flex-input">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -13,17 +13,22 @@ const PersonForm = ({ handleSubmit, handleChange, newName, newNumber }) => {
             onChange={handleChange}
             value={newName}
           />
-          <div>
-            <label htmlFor="number">Number:</label>
-
-            <input type="text" onChange={handleChange} value={newNumber} />
-          </div>
         </div>
+        <div className="flex-input">
+          <label htmlFor="number" maxLength="10">
+            Number:
+          </label>
+
+          <input type="text" onChange={handleChange} value={newNumber} />
+        </div>
+
         <div>
-          <button type="submit">add</button>
+          <button type="submit" className="button">
+            add
+          </button>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 
