@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Persons = ({ filteredName, persons, deletePerson }) => {
   return (
     <div>
@@ -11,11 +9,11 @@ const Persons = ({ filteredName, persons, deletePerson }) => {
                 .includes(filteredName.toLocaleLowerCase())
             )
             .map((person) => (
-              <div key={person.id}>
+              <div key={person.id} className="flex">
                 <p>
                   {person.name} {person.number}
                 </p>
-                <button>delete</button>
+                <button className="button delete">delete</button>
               </div>
             ))
         : persons.map((person) => (

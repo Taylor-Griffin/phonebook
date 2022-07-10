@@ -6,8 +6,7 @@ export const create = (newObject) => {
   return request.then((response) => response.data);
 };
 
-// export const remove = (id) => {
-//   console.log(id);
-//   const request = axios.delete(`${baseUrl}/${id}`);
-//   return request.then((response) => response.data);
-// };
+export const update = (id, changedPerson) => {
+  const request = axios.put(`${baseUrl}/${id}`, changedPerson);
+  return request.then((response) => response.data);
+};
