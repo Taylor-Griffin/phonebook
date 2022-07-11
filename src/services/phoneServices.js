@@ -8,5 +8,9 @@ export const create = (newObject) => {
 
 export const update = (id, changedPerson) => {
   const request = axios.put(`${baseUrl}/${id}`, changedPerson);
-  return request.then((response) => response.data);
+  return request
+    .then((response) => response.data)
+    .catch((err) => {
+      console.error('oops');
+    });
 };
