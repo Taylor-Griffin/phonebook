@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/api/persons')
+      .get('/api/persons')
       .then((res) => {
         setPersons(res.data);
       })
@@ -93,7 +93,7 @@ const App = () => {
 
     if (window.confirm(`Delete ${personName} ?`)) {
       try {
-        axios.delete(`http://localhost:3001/api/persons/${personId}`);
+        axios.delete(`/api/persons/${personId}`);
       } catch (err) {
         console.log(err);
       }
