@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/persons')
+      .get('http://localhost:3001/api/persons')
       .then((res) => {
         setPersons(res.data);
       })
@@ -23,7 +23,7 @@ const App = () => {
         postMessage('Retrieving data failed');
         setErrorStyle(true);
       });
-  }, [persons]);
+  }, [message]);
 
   const handleChange = (e) => {
     e.target.id === 'name'
@@ -46,9 +46,9 @@ const App = () => {
     const id = personToChange.id;
     try {
       update(id, changedPerson).then((returnedPerson) => {
-        setPersons(
-          persons.map((person) => (person.id !== id ? person : returnedPerson))
-        );
+        const removePerson = persons.filter((person) => person.id !== id);
+        setPersons(removePerson);
+        postMessage('Number changed for', personToChange.name);
       });
     } catch {
       setMessage('Already deleted', newName);
@@ -93,7 +93,7 @@ const App = () => {
 
     if (window.confirm(`Delete ${personName} ?`)) {
       try {
-        axios.delete(`http://localhost:3001/persons/${personId}`);
+        axios.delete(`http://localhost:3001/api/persons/${personId}`);
       } catch (err) {
         console.log(err);
       }
