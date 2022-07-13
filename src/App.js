@@ -110,7 +110,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>My Phonebook</h1>
       <Notification message={message} errorStyle={errorStyle} />
       <Filter setFilteredName={setFilteredName} />
 
