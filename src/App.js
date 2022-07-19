@@ -74,6 +74,8 @@ const App = () => {
         postMessage('Added new number for', newName);
         setErrorStyle(false);
         updateNumber();
+        setNewName('');
+        setNewNumber('');
         return;
       }
     }
