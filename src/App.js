@@ -13,18 +13,6 @@ const App = () => {
   const [message, setMessage] = useState(null);
   const [errorStyle, setErrorStyle] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get('/api/persons')
-      .then((res) => {
-        setPersons(res.data);
-      })
-      .catch((error) => {
-        postMessage('Retrieving data failed');
-        setErrorStyle(true);
-      });
-  }, [message]);
-
   const handleChange = (e) => {
     e.target.id === 'name'
       ? setNewName(e.target.value)
@@ -36,6 +24,18 @@ const App = () => {
       setMessage(null);
     }, 3000);
   };
+
+  useEffect(() => {
+    axios
+      .get('/api/persons')
+      .then((res) => {
+        setPersons(res.data);
+      })
+      .catch((error) => {
+        postMessage('Retrieving data failed');
+        setErrorStyle(true);
+      });
+  }, [message]);
   const updateNumber = () => {
     const personToChange = persons.find((person) => person.name === newName);
 
@@ -80,12 +80,18 @@ const App = () => {
       }
     }
 
-    create(personObject).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-      postMessage('Added', newName);
-      setNewName('');
-      setNewNumber('');
-    });
+    create(personObject)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        postMessage('Added', newName);
+        setNewName('');
+        setNewNumber('');
+      })
+      .catch((error) => {
+        postMessage(error.response.data.error);
+        setErrorStyle(true);
+        console.log(error.response.data.error);
+      });
   };
 
   const deletePerson = (e) => {
